@@ -6,12 +6,81 @@
         <sidebar-item
           :link="{
             name: 'Cliente',
-            icon: 'now-ui-icons users_circle-08',
+            icon: 'fa fa-user',
           }"
-        >
+         >
           <sidebar-item
             :link="{ name: 'Cliente', path: '/cliente' }"
-          ></sidebar-item>
+          >
+          </sidebar-item>
+        </sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Cargo',
+            icon: 'fa fa-suitcase',
+          }"
+         >
+          <sidebar-item
+            :link="{ name: 'Cargo', path: '/cargo' }"
+          >
+          </sidebar-item>
+        </sidebar-item>
+
+        <sidebar-item
+          :link="{
+            name: 'Perfil',
+            icon: 'fa fa-users',
+          }"
+         >
+          <sidebar-item
+            :link="{ name: 'Perfil', path: '/perfil' }"
+          >
+          </sidebar-item>
+        </sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Categoria',
+            icon: 'fa fa-list-alt',
+          }"
+         >
+          <sidebar-item
+            :link="{ name: 'Categoria', path: '/categoria' }"
+          >
+          </sidebar-item>
+        </sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Permissao',
+            icon: 'fa fa-ban',
+          }"
+         >
+
+          <sidebar-item
+            :link="{ name: 'Permissao', path: '/permissao' }"
+          >
+          </sidebar-item>
+        </sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Empresa',
+            icon: 'fa fa-building',
+          }"
+         >
+          <sidebar-item
+            :link="{ name: 'Empresa', path: '/empresa' }"
+          >
+          </sidebar-item>
+        </sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Usuario',
+            icon: 'now-ui-icons users_circle-08',
+          }"
+         >
+          <sidebar-item
+            :link="{ name: 'Usuario', path: '/usuario' }"
+          >
+          </sidebar-item>
         </sidebar-item>
         <sidebar-item
           :link="{ name: 'Pages', icon: 'now-ui-icons design_image' }"

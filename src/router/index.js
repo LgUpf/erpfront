@@ -242,7 +242,102 @@ let clientePagina = {
     },
   ]
 };
+// Cargos pagina
+import Cargo from "../views/dashboard/cargos/RegistroCargo.vue";
 
+let cargoPagina = {
+  path: "/cargo",
+  component: DashboardLayout,
+  redirect: "/cargo/registro",
+  name: "cargo",
+  children: [
+    {
+      path: "registro",
+      name: "Cargo Registro",
+      components: { default: Cargo, header: DefaultHeader },
+    },
+  ]
+};
+// Perfil pagina
+import Perfil from "../views/dashboard/perfils/RegistroPerfil.vue";
+
+let perfilPagina = {
+  path: "/perfil",
+  component: DashboardLayout,
+  redirect: "/perfil/registro",
+  name: "perfil",
+  children: [
+    {
+      path: "registro",
+      name: "Perfil Registro",
+      components: { default: Perfil, header: DefaultHeader },
+    },
+  ]
+};
+// Categoria pagina
+import Categoria from "../views/dashboard/categorias/RegistroCategoria.vue";
+
+let categoriaPagina = {
+  path: "/categoria",
+  component: DashboardLayout,
+  redirect: "/categoria/registro",
+  name: "categoria",
+  children: [
+    {
+      path: "registro",
+      name: "Categoria Registro",
+      components: { default: Categoria, header: DefaultHeader },
+    },
+  ]
+};
+// Permissao pagina
+import Permissao from "../views/dashboard/permissoes/RegistroPermissao.vue";
+
+let permissaoPagina = {
+  path: "/permissao",
+  component: DashboardLayout,
+  redirect: "/permissao/registro",
+  name: "permissao",
+  children: [
+    {
+      path: "registro",
+      name: "Permissao Registro",
+      components: { default: Permissao, header: DefaultHeader },
+    },
+  ]
+};
+// Empresa pagina
+import Empresa from "../views/dashboard/empresas/RegistroEmpresa.vue";
+
+let empresaPagina = {
+  path: "/empresa",
+  component: DashboardLayout,
+  redirect: "/empresa/registro",
+  name: "empresa",
+  children: [
+    {
+      path: "registro",
+      name: "Empresa Registro",
+      components: { default: Empresa, header: DefaultHeader },
+    },
+  ]
+};
+// Usuario pagina
+import Usuario from "../views/dashboard/usuarios/RegistroUsuario.vue";
+
+let usuarioPagina = {
+  path: "/usuario",
+  component: DashboardLayout,
+  redirect: "/usuario/registro",
+  name: "usuario",
+  children: [
+    {
+      path: "registro",
+      name: "Usuario Registro",
+      components: { default: Usuario, header: DefaultHeader },
+    },
+  ]
+};
 const routes = [
   {
     path: "/",
@@ -250,6 +345,12 @@ const routes = [
     name: "Home",
   },
   clientePagina,
+  cargoPagina,
+  perfilPagina,
+  categoriaPagina,
+  permissaoPagina,
+  empresaPagina,
+  usuarioPagina,
   authPages,
   pagesMenu,
   componentsMenu,
