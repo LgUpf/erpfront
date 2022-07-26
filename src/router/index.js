@@ -193,10 +193,10 @@ let mapsMenu = {
 };
 
 // Auth Pages
-import Pricing from "../views/dashboard/pages/Vnud-Pricing.vue";
-import Lock from "../views/dashboard/pages/Vnud-Lock.vue";
-import Register from "../views/dashboard/pages/Vnud-Register.vue";
-import Login from "../views/dashboard/pages/Vnud-Login.vue";
+import Lock from "../views/auth/Vnud-Lock.vue";
+import Login from "../views/auth/Vnud-Login.vue";
+import Register from "../views/auth/Vnud-Register.vue";
+
 
 let authPages = {
   path: "/",
@@ -212,11 +212,6 @@ let authPages = {
       path: "/register",
       name: "Register",
       component: Register,
-    },
-    {
-      path: "/pricing",
-      name: "Pricing",
-      component: Pricing,
     },
     {
       path: "/lock",
@@ -324,6 +319,7 @@ let empresaPagina = {
 };
 // Usuario pagina
 import Usuario from "../views/dashboard/usuarios/RegistroUsuario.vue";
+import { assign } from "core-js/core/object";
 
 let usuarioPagina = {
   path: "/usuario",
@@ -393,5 +389,7 @@ const router = createRouter({
   linkActiveClass: "active",
   routes,
 });
-
+router.beforeEach(async (to,from, next)=>{
+  return router.push({name:'Login'})
+  });
 export default router;
