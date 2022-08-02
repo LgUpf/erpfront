@@ -119,4 +119,18 @@ export default {
   line-height: inherit;
   margin-left: 5px;
 }
+input#email::placeholder {
+    color: #fff !important;
+}
+input#password::placeholder {
+    color: #fff !important;
+}
+.main-panel .form-group.input-group input.form-control::placeholder {
+    color: #fff !important;
+}
+
+.main-panel .form-group.input-group  input#email{
+    color: #000 !important;
+
+}
 </style>

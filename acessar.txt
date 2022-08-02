@@ -1,0 +1,33 @@
+Passo a passo para autentificação
+
+
+
+*BACK API*
+
+1) no postman colocar a url http://127.0.0.1:8000/api/auth/token
+
+2) ir na opção params >> key e value
+
+key: email >> value :login@upf.br
+key:password: >> value: login@upf.br
+device_name: pc
+
+3) no headers
+
+key: Accept >> value: application/json
+key:Authorization: >> value: Bearer 1|colocar o token gerado na tela
+device_name: pc
+
+
+*FRONT*
+
+1) Criar usuario no banco// user: login@upf.br >>> senha: login@upf.br
+
+
+2) descomentar 3 linhas no AuthController e inserir
+a senha atual criada
+
+3) dar un send no postman e depois logar no front
+
+
+
