@@ -11,7 +11,12 @@
 
       <vee-input name="email" type="email" placeholder="E-mail" label="Email" />
 
-      <vee-input name="password" type="password" placeholder="Senha" label="Senha" />
+      <vee-input
+        name="password"
+        type="password"
+        placeholder="Senha"
+        label="Senha"
+      />
 
       <div class="category form-category">* Required fields</div>
       <div class="d-flex justify-content-between align-items-center">
@@ -26,9 +31,12 @@
 
 <script>
 import { VeeInput, Checkbox } from "@/components";
+import { useStore } from "vuex";
+import router from "@/router";
 import { Form } from "vee-validate";
 import * as Yup from "yup";
 import { ElDatePicker, ElSelect, ElOption } from "element-plus";
+import { watch } from "@vue/runtime-core";
 export default {
   components: {
     Checkbox,
@@ -36,24 +44,7 @@ export default {
     Form,
     ElSelect,
   },
-  setup() {
-    function onSubmit(values) {
-      alert(JSON.stringify(values, null, 2));
-    }
-    const schema = Yup.object().shape({
-      nome: Yup.string().min(5).required(),
-      email: Yup.string().email().required('O e-mail é um campo obrigatorio'),
-      // password: Yup.string().min(5).required().label("The Password"),
-      // confirm_password: Yup.string()
-      //   .required()
-      //   .oneOf([Yup.ref("password")], "Passwords do not match"),
-    });
-
-    return {
-      schema,
-      onSubmit
-    };
-  },
+  setup() {},
 };
 </script>
 

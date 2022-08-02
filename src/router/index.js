@@ -1,4 +1,6 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
+import store from '@/store'
+import { TOKEN_NAME } from '@/config'
 
 import DashboardLayout from "../views/dashboard/layout/DashboardLayout.vue";
 import AuthLayout from "../views/dashboard/pages/AuthLayout.vue";
@@ -130,7 +132,7 @@ let formsMenu = {
   ],
 };
 
-// Tables Pages
+//Tables Pages
 import RegularTables from "../views/dashboard/tables/RegularTables.vue";
 import ExtendedTables from "../views/dashboard/tables/ExtendedTables.vue";
 import PaginatedTables from "../views/dashboard/tables/PaginatedTables.vue";
@@ -204,15 +206,16 @@ let authPages = {
   name: "Authentication",
   children: [
     {
-      path: "/login",
-      name: "Login",
-      component: Login,
-    },
-    {
       path: "/register",
       name: "Register",
       component: Register,
     },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+    },
+
     {
       path: "/lock",
       name: "Lock",
@@ -285,7 +288,7 @@ let categoriaPagina = {
     },
   ]
 };
-// Permissao pagina
+//Permissao pagina
 import Permissao from "../views/dashboard/permissoes/RegistroPermissao.vue";
 
 let permissaoPagina = {
@@ -301,7 +304,7 @@ let permissaoPagina = {
     },
   ]
 };
-// Empresa pagina
+//Empresa pagina
 import Empresa from "../views/dashboard/empresas/RegistroEmpresa.vue";
 
 let empresaPagina = {
@@ -317,9 +320,8 @@ let empresaPagina = {
     },
   ]
 };
-// Usuario pagina
+//Usuario pagina
 import Usuario from "../views/dashboard/usuarios/RegistroUsuario.vue";
-import { assign } from "core-js/core/object";
 
 let usuarioPagina = {
   path: "/usuario",
@@ -380,16 +382,26 @@ const routes = [
         components: { default: Widgets, header: DefaultHeader },
       },
     ],
-  },
-  { path: "/:pathMatch(.*)*", component: NotFound },
+  }
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   linkActiveClass: "active",
   routes,
 });
-router.beforeEach(async (to,from, next)=>{
-  return router.push({name:'Login'})
-  });
+router.beforeEach(async (to, from, next) => {
+  const logado = store.state.usuarios.logado
+  const token = await localStorage.getItem(TOKEN_NAME)
+  if (!token && to.name != 'login') {
+    next('/login')
+
+  } else {
+    next();
+  }
+
+  // if (to.path !== '/login') {
+  //   next('/login');
+
+});
 export default router;

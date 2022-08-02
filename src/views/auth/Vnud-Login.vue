@@ -53,6 +53,9 @@
   </Form>
 </template>
 <script>
+import { ref, watch } from "vue";
+import { useStore } from "vuex";
+import router from "@/router";
 import { VeeInput } from "@/components";
 import { Form } from "vee-validate";
 import * as Yup from "yup";
@@ -63,18 +66,50 @@ export default {
     Form,
   },
   setup() {
-    function onSubmit(values) {
-      alert(JSON.stringify(values, null, 2));
-    }
+    const store = useStore();
+    const email = ref("");
+    const password = ref("");
 
+    watch(
+      () => store.state.usuarios.logado,
+      (logado) => {
+        if (logado) {
+          router.push({ name: "Dashboard" });
+        }
+      }
+    );
+
+    function onSubmit(values) {
+      store
+        .dispatch("login", {
+          email: values.email,
+          password: values.password,
+          device_name: "pc",
+        })
+        .then(() => {
+          router.push({ name: "Dashboard" });
+        })
+        .catch((err) => {
+          console.log(err);
+          if (error.status === 422) msgError = "Dados Inválidos";
+          if (error.status === 404) msgError = "Usuário não encontrado";
+        });
+    }
     const schema = Yup.object().shape({
-      email: Yup.string().email().required().label("The Email"),
-      password: Yup.string().min(6).required().label("The Password"),
+      name: Yup.string().required("O nome é obrigatório"),
+      email: Yup.string()
+        .email("Insira um e-mail válido")
+        .required("O e-mail é obrigatório"),
+      password: Yup.string()
+        .min(6, "A senha deve ter no mínimo 6 caracteres")
+        .required("A senha é obrigatória"),
     });
 
     return {
-      onSubmit,
       schema,
+      onSubmit,
+      email,
+      password,
     };
   },
 };
