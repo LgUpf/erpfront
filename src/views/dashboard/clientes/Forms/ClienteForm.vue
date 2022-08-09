@@ -25,38 +25,18 @@
         </el-option>
       </el-select> -->
 
-      <vee-input
-        name="telefone"
-        type="tel"
-        placeholder="Telefone"
-        label="Telefone"
-      />
+      <vee-input name="telefone" type="tel" placeholder="Telefone" label="Telefone" />
 
       <div class="row">
         <div class="col-md-4">
-          <vee-input
-            name="estado"
-            type="text"
-            placeholder="Estado"
-            label="Estado"
-          />
+          <vee-input name="estado" type="text" placeholder="Estado" label="Estado" />
         </div>
         <div class="col-md-4">
-          <vee-input
-            name="cidade"
-            type="text"
-            placeholder="Cidade"
-            label="Cidade"
-          />
+          <vee-input name="cidade" type="text" placeholder="Cidade" label="Cidade" />
         </div>
 
         <div class="col-md-4">
-          <vee-input
-            name="bairro"
-            type="text"
-            placeholder="Bairro"
-            label="Bairro"
-          />
+          <vee-input name="bairro" type="text" placeholder="Bairro" label="Bairro" />
         </div>
       </div>
 
@@ -78,12 +58,7 @@
           />
         </div>
         <div class="col-md-3">
-          <vee-input
-            name="numero"
-            type="text"
-            placeholder="Numero"
-            label="Numero"
-          />
+          <vee-input name="numero" type="text" placeholder="Numero" label="Numero" />
         </div>
         <div class="col-md-3">
           <vee-input name="cep" type="text" placeholder="Cep" label="Cep" />
@@ -105,6 +80,7 @@
 import { VeeInput, Checkbox } from "@/components";
 import { Form } from "vee-validate";
 import * as Yup from "yup";
+import { useStore } from "vuex";
 import { ElDatePicker, ElSelect, ElOption } from "element-plus";
 export default {
   components: {
@@ -114,21 +90,33 @@ export default {
     ElSelect,
   },
   setup() {
+    const store = useStore();
+    const addClientes = () => {};
     function onSubmit(values) {
-      alert(JSON.stringify(values, null, 2));
+      store.dispatch("saveClientes", {
+        nome: values.nome,
+        telefone: values.telefone,
+        estado: values.estado,
+        cidade: values.cidade,
+        bairro: values.bairro,
+        logradouro: values.logradouro,
+        endereco: values.endereco,
+        numero: values.numero,
+        cep: values.cep,
+        email: values.email,
+        // descricao:values.descricao,
+        user_id: "1",
+      });
     }
     const schema = Yup.object().shape({
-      nome: Yup.string().min(5).required(),
-      email: Yup.string().email().required('O e-mail é um campo obrigatorio'),
-      // password: Yup.string().min(5).required().label("The Password"),
-      // confirm_password: Yup.string()
-      //   .required()
-      //   .oneOf([Yup.ref("password")], "Passwords do not match"),
+      nome: Yup.string().min(5).required("O nome é um campo obrigatorio"),
+      // descricao: Yup.string().min(5).required('A descrição é um campo obrigatorio'),
     });
 
     return {
       schema,
-      onSubmit
+      onSubmit,
+      addClientes,
     };
   },
 };

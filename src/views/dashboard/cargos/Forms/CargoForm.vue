@@ -1,5 +1,5 @@
 <template>
-  <Form @submit="onSubmit" :validation-schema="schema">
+ <Form @submit="onSubmit" :validation-schema="schema">
     <vnud-card>
       <template v-slot:header>
         <div>
@@ -9,15 +9,17 @@
         <div class="col-md-12">
           <vee-input name="nome" type="text" placeholder="Nome" label="Nome" />
         </div>
-        <div class="col-md-12">
+        <n-button native-type="submit" type="primary">Register</n-button>
+        <!-- <div class="col-md-12">
               <vee-input
                 name="descricao"
                 type="text"
                 placeholder="Descrição"
                 label="Descricao"
               />
-              <n-button native-type="submit" type="primary">Register</n-button>
-        </div>
+
+        </div> -->
+        <!-- @click.prevent="addCargos" -->
     </vnud-card>
   </Form>
 </template>
@@ -26,6 +28,9 @@
 import { VeeInput, Checkbox } from "@/components";
 import { Form } from "vee-validate";
 import * as Yup from "yup";
+import {useStore} from "vuex";
+
+
 export default {
   components: {
     Checkbox,
@@ -33,17 +38,25 @@ export default {
     Form,
   },
   setup() {
+      const store=useStore()
+      const addCargos=()=>{
+    }
     function onSubmit(values) {
-      alert(JSON.stringify(values, null, 2));
+      store.dispatch("saveCargos",{
+        nome:values.nome,
+        // descricao:values.descricao,
+        user_id:'1'
+      })
     }
     const schema = Yup.object().shape({
-      nome: Yup.string().min(5).required('O nome é um campo obrigatorio'),
-      descricao: Yup.string().min(5).required('A descrição é um campo obrigatorio'),
+      nome: Yup.string().min(5).required('O nome é um campo obrigatorio')
+      // descricao: Yup.string().min(5).required('A descrição é um campo obrigatorio'),
     });
 
     return {
       schema,
-      onSubmit
+      onSubmit,
+      addCargos
     };
   },
 };
